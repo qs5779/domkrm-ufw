@@ -33,7 +33,7 @@ class ufw (
     line    => $ipv6 ? {
       false   => 'IPV6=no',
       default => 'IPV6=yes'
-    }
+    },
     match   => '^IPV6=',
     path    => '/etc/default/ufw',
     notify  => Service['ufw']

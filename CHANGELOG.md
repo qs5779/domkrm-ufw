@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.1 (2019-07-22)
+
+**Bugfixes**
+
+Missing comma in manifest
+
 ## 1.1.0 (2019-07-22)
 
 **Features**
