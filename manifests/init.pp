@@ -1,5 +1,9 @@
 # Installs, configures and enables UFW 
-class ufw {
+class ufw (
+
+  Boolean $ipv6 = true
+
+) {
 
   # Install package
   package { 'ufw': }
@@ -16,6 +20,23 @@ class ufw {
     command => 'ufw --force enable',
     unless  => 'ufw status | grep -q "Status: active"',
     path    => '/bin:/usr/bin:/sbin:/usr/sbin'
+  }
+
+  # Define service
+  service { 'ufw':
+    ensure => 'running',
+    enable => true
+  }
+
+  # Disable IPv6
+  file_line { 'ufw-ipv6':
+    line    => $ipv6 ? {
+      false   => 'IPV6=no',
+      default => 'IPV6=yes'
+    }
+    match   => '^IPV6=',
+    path    => '/etc/default/ufw',
+    notify  => Service['ufw']
   }
 
 }

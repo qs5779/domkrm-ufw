@@ -10,7 +10,7 @@ To have Puppet install UFW, include the ufw class.
 This will install the UFW package, deny all incoming connections and enable UFW.
 
 ```puppet
-include ufw
+class { 'ufw': }
 ```
 
 To allow certain connections:
@@ -28,6 +28,14 @@ ufw::allow { 'ssh-from-trusted':
 ufw::allow { 'ssh-on-specific-interface':
   port      => '22',
   interface => 'eth1'
+}
+```
+
+To disable all IPv6 connections, you have to initialize ufw class with following parameter:
+
+```puppet
+class { 'ufw':
+  ipv6 => false
 }
 ```
 
