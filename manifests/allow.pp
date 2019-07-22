@@ -1,11 +1,11 @@
 # Creates a new allow rule in UFW
 define ufw::allow (
 
-  Enum['present', 'absent'] $ensure = 'present',
   String $port,
   Enum['tcp', 'udp'] $proto = 'tcp',
   String $interface = '',
-  String $from = ''
+  String $from = '',
+  Enum['present', 'absent'] $ensure = 'present'
 
 ) {
 
@@ -37,7 +37,7 @@ define ufw::allow (
   }
 
   $_rule   = "allow in${_interface} proto ${proto}${_from} to any port ${port}"
-  $_exists = "ufw status | grep -qE '^${_port_match}\/${proto}${_interface_match} +ALLOW +${_from_match}( +.*)?$'"
+  $_exists = "ufw status | grep -qE '^${_port_match}\\/${proto}${_interface_match} +ALLOW +${_from_match}( +.*)?$'"
 
   if $ensure == 'present' {
 

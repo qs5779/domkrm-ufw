@@ -5,11 +5,17 @@ class ufw (
 
 ) {
 
+  # Variables for config file
+  $_ipv6 = $ipv6 ? {
+    false   => 'IPV6=no',
+    default => 'IPV6=yes'
+  }
+
   # Install package
   package { 'ufw': }
 
   # Deny all
-  exec { 'ufw-deny' :
+  exec { 'ufw-deny':
     command => 'ufw default deny',
     unless  => 'ufw status verbose | grep -q "Default: deny (incoming)"',
     path    => '/bin:/usr/bin:/sbin:/usr/sbin'
@@ -30,13 +36,10 @@ class ufw (
 
   # Disable IPv6
   file_line { 'ufw-ipv6':
-    line    => $ipv6 ? {
-      false   => 'IPV6=no',
-      default => 'IPV6=yes'
-    },
-    match   => '^IPV6=',
-    path    => '/etc/default/ufw',
-    notify  => Service['ufw']
+    line   => $_ipv6,
+    match  => '^IPV6=',
+    path   => '/etc/default/ufw',
+    notify => Service['ufw']
   }
 
 }
