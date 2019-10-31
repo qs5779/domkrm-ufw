@@ -18,20 +18,23 @@ class ufw (
   exec { 'ufw-deny':
     command => 'ufw default deny',
     unless  => 'ufw status verbose | grep -q "Default: deny (incoming)"',
-    path    => '/bin:/usr/bin:/sbin:/usr/sbin'
+    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+    require => Package['ufw']
   }
 
   # Enable UFW
   exec { 'ufw-enable':
     command => 'ufw --force enable',
     unless  => 'ufw status | grep -q "Status: active"',
-    path    => '/bin:/usr/bin:/sbin:/usr/sbin'
+    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+    require => Package['ufw']
   }
 
   # Define service
   service { 'ufw':
     ensure => 'running',
-    enable => true
+    enable => true,
+    require => Package['ufw']
   }
 
   # Disable IPv6
@@ -39,7 +42,8 @@ class ufw (
     line   => $_ipv6,
     match  => '^IPV6=',
     path   => '/etc/default/ufw',
-    notify => Service['ufw']
+    notify => Service['ufw'],
+    require => Package['ufw']
   }
 
 }
