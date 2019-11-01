@@ -44,7 +44,8 @@ define ufw::allow (
     exec { "ufw-allow-${name}":
       command => "ufw ${_rule}",
       unless  => $_exists,
-      path    => '/bin:/usr/bin:/sbin:/usr/sbin'
+      path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+      require => Package['ufw']
     }
 
   } else {
@@ -52,7 +53,8 @@ define ufw::allow (
     exec { "ufw-delete-${name}":
       command => "ufw delete ${_rule}",
       onlyif  => $_exists,
-      path    => '/bin:/usr/bin:/sbin:/usr/sbin'
+      path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+      require => Package['ufw']
     }
 
   }
