@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.4 (2019-11-01)
+
+**Bugfixes**
+
+Puppet Lint warnings
+
 ## 1.1.3 (2019-11-01)
 
 **Bugfixes**

@@ -32,17 +32,17 @@ class ufw (
 
   # Define service
   service { 'ufw':
-    ensure => 'running',
-    enable => true,
+    ensure  => 'running',
+    enable  => true,
     require => Package['ufw']
   }
 
   # Disable IPv6
   file_line { 'ufw-ipv6':
-    line   => $_ipv6,
-    match  => '^IPV6=',
-    path   => '/etc/default/ufw',
-    notify => Service['ufw'],
+    line    => $_ipv6,
+    match   => '^IPV6=',
+    path    => '/etc/default/ufw',
+    notify  => Service['ufw'],
     require => Package['ufw']
   }
 
