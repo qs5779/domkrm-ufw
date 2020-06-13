@@ -1,0 +1,7 @@
+<%- | String $comment,
+| -%>
+# vim: ft=sh
+for rule in `ufw status numbered | tac | sed '/^[\[]/!d' | grep "$comment" | cut -d ' ' -f 1 | tr -d '[\[\]]'`
+do
+  ufw --force delete $rule
+done
