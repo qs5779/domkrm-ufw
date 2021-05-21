@@ -19,7 +19,7 @@ define ufw::rule (
   }
   else {
     exec { "ufw-delete-${name}":,
-      command => "ufw status numbered | tac | sed '/^[\[]/!d' | grep -E '# ${name}' | cut -d ']' -f 1 | tr -d '[\[ ]' | xargs ufw --force delete",
+      command => "ufw status numbered | tac | sed '/^[[]/!d' | grep -E '# ${name}' | cut -d ']' -f 1 | tr -d '[[ ]' | xargs ufw --force delete",
       onlyif  => $exists,
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       require => Package['ufw']

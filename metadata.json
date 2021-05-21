@@ -1,6 +1,6 @@
 {
   "name": "domkrm-ufw",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "author": "DomKrm",
   "summary": "Installs, configures and manages UFW.",
   "license": "Apache-2.0",
@@ -15,21 +15,23 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "16.04",
-        "18.04"
+        "18.04",
+        "20.04"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 7.0.0"
+      "version_requirement": ">= 4.10.0 < 8.0.0"
     }
   ],
   "tags": [
